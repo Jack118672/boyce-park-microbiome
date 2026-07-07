@@ -438,8 +438,7 @@ input[type="checkbox"] {
 }
 
 .story-grid p,
-.method-list,
-.takeaway-list {
+.method-list {
   color: #354154;
 }
 
@@ -743,57 +742,6 @@ textarea {
   margin-bottom: 9px;
 }
 
-.takeaway-card p {
-  font-size: 17px;
-  color: #354154;
-}
-
-.takeaway-list {
-  margin: 16px 0 0;
-  padding-left: 22px;
-}
-
-.defense-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
-}
-
-.defense-grid div {
-  min-height: 118px;
-  padding: 14px;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: var(--mint);
-}
-
-.defense-grid div:nth-child(2) {
-  background: var(--sun);
-}
-
-.defense-grid div:nth-child(3) {
-  background: var(--rose);
-}
-
-.defense-grid div:nth-child(4) {
-  background: var(--lavender);
-}
-
-.defense-grid strong,
-.defense-grid span {
-  display: block;
-}
-
-.defense-grid strong {
-  margin-bottom: 6px;
-  color: var(--navy);
-}
-
-.defense-grid span {
-  color: #3d4758;
-  line-height: 1.4;
-}
-
 .footer {
   width: min(1400px, calc(100% - 32px));
   margin: 0 auto 26px;
@@ -859,8 +807,7 @@ textarea {
   .stretch-grid,
   .stats-row,
   .cer-grid,
-  .story-grid,
-  .defense-grid {
+  .story-grid {
     grid-template-columns: 1fr;
   }
 

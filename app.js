@@ -342,12 +342,6 @@ ${state.notes.internalComparison || "Add interpretation."}
 
 ## Interpretation
 ${state.notes.storyText || "Add claim, evidence, and reasoning."}
-
-## Q&A Defense
-- Explain how BLAST classifies by alignment-as-search.
-- Explain why the pipeline and BLAST can disagree.
-- Explain how controls affect trust.
-- Explain why composition and PCoA answer different parts of the question.
 `;
 
   const blob = new Blob([markdown], { type: "text/markdown" });
