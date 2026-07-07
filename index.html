@@ -3,114 +3,121 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Boyce Park pond water taxonomy project hub for Group Alpha.">
-  <title>Group Alpha | Boyce Park Microbiome Project</title>
+  <meta name="description" content="Group Alpha Boyce Park pond-water microbiome presentation.">
+  <title>Group Alpha | Boyce Park Microbiome</title>
   <link rel="icon" href="data:,">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <header class="app-header">
     <div class="header-main">
-      <p class="eyebrow">Group Alpha | Boyce Park pond water</p>
+      <p class="eyebrow">Group Alpha | Boyce Park Pond Water</p>
       <h1>Who Lives There?</h1>
-      <p class="lede">A colorful project hub for classifying the Boyce Park pond-water microbiome, checking which names are trustworthy, and turning the data into a biology story.</p>
+      <p class="lede">A student presentation about the microbes living in Boyce Park pond water and what they may reveal about freshwater ecology and the region's mining history.</p>
     </div>
-    <div class="header-actions" aria-label="Project actions">
-      <button id="loadExample" class="button ghost" type="button">Load example</button>
-      <button id="exportSummary" class="button primary" type="button">Export outline</button>
+    <div class="header-actions" aria-label="Presentation actions">
+      <button id="loadExample" class="button ghost" type="button">Load sample evidence</button>
+      <button id="exportSummary" class="button primary" type="button">Export speaker notes</button>
     </div>
   </header>
 
   <main>
-    <section class="hero-grid" aria-labelledby="mission-title">
-      <div class="hero-card mission-card">
-        <p class="chip coral">Project mission</p>
-        <h2 id="mission-title">Find who lives in Boyce Park pond water.</h2>
-        <p>Use the provided 16S pipeline outputs, your own BLAST checks, controls, composition plots, and PCoA comparisons to decide whether the pond community looks like ordinary freshwater, mine-drainage influence, or a mixture of both.</p>
-        <div class="metric-strip" aria-label="Project snapshot">
+    <section class="hero-grid" aria-labelledby="presentation-title">
+      <article class="hero-card">
+        <p class="chip coral">Research focus</p>
+        <h2 id="presentation-title">Boyce Park looks peaceful, but its pond microbes can tell a deeper story.</h2>
+        <p>Our project uses 16S taxonomic data to identify the pond's microbial community, check which organism names are trustworthy, and compare Boyce Park against Pittsburgh river samples.</p>
+        <div class="claim-strip" aria-label="Presentation thesis">
           <div>
-            <span>Environment</span>
+            <span>Site</span>
             <strong>Boyce Park pond water</strong>
           </div>
           <div>
-            <span>Question</span>
-            <strong>Scenic pond, mining signal, or both?</strong>
+            <span>Main idea</span>
+            <strong>Freshwater community with possible environmental signals</strong>
           </div>
           <div>
-            <span>Submit</span>
-            <strong>Colab notebook</strong>
+            <span>Evidence</span>
+            <strong>BLAST, pipeline taxonomy, controls, bar plots, PCoA</strong>
           </div>
         </div>
-      </div>
+      </article>
       <div class="hero-visual" aria-label="Animated pond microbiome visual">
         <canvas id="pondCanvas" width="900" height="520"></canvas>
       </div>
     </section>
 
-    <nav class="section-nav" aria-label="Page sections">
-      <button type="button" data-target="data">Data</button>
-      <button type="button" data-target="workflow">Workflow</button>
-      <button type="button" data-target="trust">BLAST trust</button>
+    <nav class="section-nav" aria-label="Presentation sections">
+      <button type="button" data-target="storyline">Story</button>
+      <button type="button" data-target="methods">Methods</button>
+      <button type="button" data-target="evidence">Evidence</button>
       <button type="button" data-target="profile">Profile</button>
-      <button type="button" data-target="comparisons">PCoA</button>
-      <button type="button" data-target="farther">Going farther</button>
-      <button type="button" data-target="submit">Submit</button>
+      <button type="button" data-target="comparisons">Comparisons</button>
+      <button type="button" data-target="deeper">Deeper</button>
+      <button type="button" data-target="takeaway">Takeaway</button>
     </nav>
 
-    <section id="data" class="section two-column">
+    <section id="storyline" class="section presentation-panel">
+      <div class="section-heading">
+        <p class="chip teal">Opening story</p>
+        <h2>Why This Pond Is Interesting</h2>
+      </div>
+      <div class="story-grid">
+        <article>
+          <h3>The setting</h3>
+          <p>Boyce Park is a county park, but the surrounding region has been shaped by old coal mining. That makes the pond more than just a pretty water sample: it is a place where biology may reflect local chemistry and history.</p>
+        </article>
+        <article>
+          <h3>The question</h3>
+          <p>We are asking whether the microbial community looks like a typical freshwater pond, shows signs that could fit mine drainage or runoff, or lands somewhere in between.</p>
+        </article>
+        <article>
+          <h3>The claim we are building</h3>
+          <p>The strongest version of our answer has to come from multiple evidence types agreeing, not from one colorful plot by itself.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="methods" class="section two-column">
       <article class="panel">
-        <p class="chip teal">Alpha-only input</p>
-        <h2>Boyce Park Focus</h2>
-        <p>Group Alpha studies pond water from Boyce Park, a county park in a region shaped by old coal mining. The core question is whether the water's microbiome matches a typical pond community or carries a signal consistent with mine drainage, runoff, sediment chemistry, or other local environmental pressures.</p>
-        <div class="question-list">
-          <label><input type="checkbox"> Which microbes dominate the Alpha samples?</label>
-          <label><input type="checkbox"> Are the dominant taxa common freshwater organisms?</label>
-          <label><input type="checkbox"> Do any taxa suggest low oxygen, iron or sulfur cycling, runoff, sediment disturbance, or metal stress?</label>
-          <label><input type="checkbox"> Are suspicious taxa also present in blank or distilled-water controls?</label>
-          <label><input type="checkbox"> Does Boyce Park cluster near the shared river baseline or somewhere different?</label>
-        </div>
+        <p class="chip gold">How we identified organisms</p>
+        <h2>From DNA Reads To Names</h2>
+        <ol class="method-list">
+          <li><strong>Rank abundant sequences.</strong> We start with the feature table so our manual checks focus on the sequences that matter most.</li>
+          <li><strong>BLAST top sequences.</strong> BLAST works like alignment-as-search: it compares our unknown sequence to reference 16S sequences.</li>
+          <li><strong>Compare to the pipeline.</strong> We place our BLAST calls beside the provided QIIME2/SILVA taxonomy and look for agreement.</li>
+          <li><strong>Check controls.</strong> Blank and distilled-water samples help us avoid treating contamination as a real pond signal.</li>
+        </ol>
       </article>
 
-      <article class="panel link-panel">
-        <p class="chip purple">Start here</p>
-        <h2>Project Links</h2>
+      <article class="panel resource-panel">
+        <p class="chip purple">Data used</p>
+        <h2>Files Behind The Presentation</h2>
         <div class="resource-list">
           <a href="https://drive.google.com/drive/folders/1aDmspX8DA3zgbUUuqsa9W7e-PHoSYJyR" target="_blank" rel="noreferrer">
             <strong>Alpha data folder</strong>
-            <span>Boyce Park taxonomy, feature table, bar plots, diversity files, and README.</span>
+            <span>Boyce Park feature table, taxonomy, bar plots, diversity files, and README.</span>
           </a>
           <a href="https://view.qiime2.org" target="_blank" rel="noreferrer">
             <strong>QIIME 2 View</strong>
-            <span>Open .qzv visualizations such as taxa_barplot.qzv and diversity outputs.</span>
+            <span>Used to inspect .qzv visualizations like taxa_barplot.qzv.</span>
           </a>
           <a href="https://drive.google.com/drive/folders/1QK5SER5THS8j5BUOS7zALtYepKe9M-mH" target="_blank" rel="noreferrer">
             <strong>Shared water-site baseline</strong>
-            <span>Use this for the required Boyce Park versus rivers PCoA comparison.</span>
-          </a>
-          <a href="https://drive.google.com/drive/folders/1nOyQx1C0GhdftXkpL_rugpU5AqNKYNC_" target="_blank" rel="noreferrer">
-            <strong>All-samples baseline</strong>
-            <span>Optional broader context if you want to compare water and soil samples.</span>
+            <span>Used for Boyce Park versus river comparisons.</span>
           </a>
         </div>
       </article>
     </section>
 
-    <section id="workflow" class="section">
-      <div class="section-heading">
-        <p class="chip gold">Required protocol</p>
-        <h2>What Group Alpha Must Do</h2>
-      </div>
-      <div id="workflowSteps" class="workflow-grid"></div>
-    </section>
-
-    <section id="trust" class="section panel">
+    <section id="evidence" class="section panel evidence-panel">
       <div class="split-heading">
         <div>
-          <p class="chip coral">Alignment-as-search</p>
-          <h2>BLAST vs. Pipeline Trust Table</h2>
-          <p>Rank roughly 20 abundant representative sequences, BLAST each sequence, compare your call with taxonomy.tsv, and use controls before believing a name.</p>
+          <p class="chip coral">Evidence table</p>
+          <h2>Which Taxonomic Names Do We Trust?</h2>
+          <p>This table is the credibility check: abundant features, manual BLAST calls, pipeline calls, identity, control status, and confidence.</p>
         </div>
-        <button id="addFeature" class="button primary" type="button">Add feature</button>
+        <button id="addFeature" class="button primary" type="button">Add evidence row</button>
       </div>
       <div class="table-wrap">
         <table id="featureTable">
@@ -129,11 +136,11 @@
           <tbody></tbody>
         </table>
       </div>
-      <div class="stats-row" aria-label="Trust table summary">
-        <div><span>Total reads tracked</span><strong id="totalReads">0</strong></div>
-        <div><span>High-trust calls</span><strong id="highTrust">0</strong></div>
-        <div><span>Control flags</span><strong id="controlFlags">0</strong></div>
-        <div><span>Top organism</span><strong id="topOrganism">-</strong></div>
+      <div class="stats-row" aria-label="Evidence summary">
+        <div><span>Reads tracked</span><strong id="totalReads">0</strong></div>
+        <div><span>High-trust names</span><strong id="highTrust">0</strong></div>
+        <div><span>Control warnings</span><strong id="controlFlags">0</strong></div>
+        <div><span>Most abundant call</span><strong id="topOrganism">-</strong></div>
       </div>
     </section>
 
@@ -142,15 +149,15 @@
         <div class="split-heading">
           <div>
             <p class="chip teal">Community profile</p>
-            <h2>Major Taxa</h2>
-            <p>Use the taxonomy table or taxa_barplot.qzv to build a broad composition view. Keep the total near 100% or add an Other category.</p>
+            <h2>Who Dominates The Pond?</h2>
+            <p>Use your taxonomy table or taxa bar plot to show the major groups. The goal is a broad, readable profile, not a wall of species names.</p>
           </div>
           <button id="addTaxon" class="button ghost" type="button">Add taxon</button>
         </div>
         <div id="taxonInputs" class="taxon-list"></div>
       </article>
       <article class="panel chart-panel">
-        <p class="chip purple">Live figure</p>
+        <p class="chip purple">Presentation figure</p>
         <h2>Composition Chart</h2>
         <canvas id="compositionChart" width="760" height="460" aria-label="Composition chart"></canvas>
         <p id="compositionNote" class="note"></p>
@@ -159,91 +166,98 @@
 
     <section id="comparisons" class="section two-column">
       <article class="panel">
-        <p class="chip gold">Comparison 1</p>
-        <h2>Boyce Park vs. Rivers</h2>
-        <label for="riverComparison">What does the shared water-site PCoA show?</label>
-        <textarea id="riverComparison" placeholder="Example: Boyce Park samples cluster near/far from river samples because..."></textarea>
+        <p class="chip gold">PCoA evidence</p>
+        <h2>Boyce Park Compared With Rivers</h2>
+        <p class="speaker-label">What this slide should prove:</p>
+        <p>Whether Boyce Park pond water clusters with the urban river baseline or separates as its own community.</p>
+        <label for="riverComparison">Speaker note</label>
+        <textarea id="riverComparison" placeholder="Replace this with your PCoA interpretation. Example: Boyce Park separates from river samples, suggesting a distinct pond community..."></textarea>
       </article>
       <article class="panel">
-        <p class="chip teal">Comparison 2</p>
-        <h2>Inside Alpha</h2>
-        <label for="internalComparison">What structure appears inside the Boyce Park samples?</label>
-        <textarea id="internalComparison" placeholder="Example: Samples separate by sub-location, edge/depth, date, control status, or another metadata feature..."></textarea>
+        <p class="chip teal">PCoA evidence</p>
+        <h2>Patterns Inside Alpha Samples</h2>
+        <p class="speaker-label">What this slide should prove:</p>
+        <p>Whether Boyce Park samples separate by sub-location, site conditions, control status, or another metadata category.</p>
+        <label for="internalComparison">Speaker note</label>
+        <textarea id="internalComparison" placeholder="Replace this with the internal Alpha pattern. Example: edge samples cluster separately from open-water samples..."></textarea>
       </article>
     </section>
 
-    <section id="story" class="section panel story-panel">
-      <p class="chip purple">Do not stop at a bar chart</p>
-      <h2>Claim, Evidence, Reasoning</h2>
-      <div class="cer-grid" aria-label="Claim evidence reasoning prompts">
+    <section id="interpretation" class="section presentation-panel">
+      <div class="section-heading">
+        <p class="chip purple">Biology interpretation</p>
+        <h2>Turning Names Into A Story</h2>
+      </div>
+      <div class="cer-grid" aria-label="Claim evidence reasoning">
         <div>
           <strong>Claim</strong>
-          <span>What lives there, and what does that suggest about Boyce Park pond water?</span>
+          <span>What type of community does Boyce Park pond water appear to have?</span>
         </div>
         <div>
           <strong>Evidence</strong>
-          <span>Use BLAST confidence, pipeline agreement, controls, composition, and PCoA position.</span>
+          <span>Use trusted taxa, controls, composition, and both PCoA comparisons.</span>
         </div>
         <div>
           <strong>Reasoning</strong>
-          <span>Connect microbes to freshwater ecology, mine-drainage influence, nutrients, oxygen, sediments, or runoff.</span>
+          <span>Connect organisms to freshwater ecology, oxygen, nutrients, sediment, runoff, or mine-drainage chemistry.</span>
         </div>
       </div>
-      <label for="storyText">Draft the biology story</label>
-      <textarea id="storyText" placeholder="Write the Alpha story here. What is present? What is surprising? Which calls are solid? What would you test next?"></textarea>
+      <label for="storyText">Presentation script for the interpretation slide</label>
+      <textarea id="storyText" placeholder="Write the explanation you would say out loud. Focus on what the evidence supports and what is still uncertain."></textarea>
     </section>
 
-    <section id="farther" class="section">
+    <section id="deeper" class="section">
       <div class="section-heading">
         <p class="chip coral">Going farther</p>
-        <h2>Stretch Work</h2>
-        <p>Use these only after the required analysis works. They turn the project from a list of names into an argument about what the community can do and whether the pattern is real.</p>
+        <h2>How We Would Strengthen The Argument</h2>
+        <p>These are the stretch analyses that make the project stronger without turning the website back into a checklist.</p>
       </div>
       <div class="stretch-grid">
         <article class="stretch-card">
           <span class="swatch gold-bg"></span>
           <h3>Predict function</h3>
-          <p>Use a tool such as PICRUSt to predict what the community may be able to do. Ask whether predicted functions fit pond water or a mine-influenced setting.</p>
-          <label><input type="checkbox" data-save-check="picrust"> Included in notebook</label>
+          <p>PICRUSt could estimate what the community may be able to do, then we could ask whether those predicted functions fit a pond or mine-influenced environment.</p>
         </article>
         <article class="stretch-card">
           <span class="swatch purple-bg"></span>
           <h3>Test separation</h3>
-          <p>Do not only eyeball the PCoA. Run PERMANOVA or ANOSIM and report the grouping, statistic, p-value, and plain-English meaning.</p>
-          <label><input type="checkbox" data-save-check="permanova"> Included in notebook</label>
+          <p>PERMANOVA or ANOSIM would let us test whether a PCoA separation is statistically meaningful instead of just visually interesting.</p>
         </article>
         <article class="stretch-card">
           <span class="swatch teal-bg"></span>
-          <h3>Indicator organisms</h3>
-          <p>Name the taxa that most drive the Boyce Park signal. Separate confident genus-level calls from weaker lower-level guesses.</p>
-          <label><input type="checkbox" data-save-check="indicator"> Included in notebook</label>
+          <h3>Find indicator organisms</h3>
+          <p>We could highlight the taxa most responsible for the Boyce Park signal and explain their likely ecological roles.</p>
         </article>
       </div>
     </section>
 
-    <section id="submit" class="section two-column">
-      <article class="panel">
-        <p class="chip teal">7-minute demo</p>
-        <h2>Presentation Run of Show</h2>
-        <ol class="demo-list">
-          <li>Introduce Boyce Park pond water and the mine-history question.</li>
-          <li>Show who dominates the community and which calls are strongest.</li>
-          <li>Explain where BLAST and the pipeline agree or disagree.</li>
-          <li>Show the control check before trusting the profile.</li>
-          <li>Use the two PCoA views to explain how Alpha differs from rivers and from itself.</li>
-          <li>End with the biology story and one next experiment.</li>
-        </ol>
+    <section id="takeaway" class="section two-column">
+      <article class="panel takeaway-card">
+        <p class="chip teal">Closing slide</p>
+        <h2>Our Takeaway</h2>
+        <p>The final answer should be careful: we can describe the community and compare it to other water samples, but we only make strong environmental claims when BLAST, pipeline taxonomy, controls, and ordination patterns support the same story.</p>
+        <ul class="takeaway-list">
+          <li>Names are evidence only after confidence checks.</li>
+          <li>Controls decide what not to trust.</li>
+          <li>Composition tells who dominates.</li>
+          <li>PCoA shows whether Boyce Park is similar to or different from other water communities.</li>
+        </ul>
       </article>
       <article class="panel">
-        <p class="chip gold">Final checklist</p>
-        <h2>Submit a Shared Colab Notebook</h2>
-        <div id="submissionChecklist" class="question-list"></div>
+        <p class="chip gold">Teacher-ready evidence</p>
+        <h2>What We Can Defend In Q&A</h2>
+        <div class="defense-grid">
+          <div><strong>Tool</strong><span>What BLAST does and why the pipeline might differ.</span></div>
+          <div><strong>Trust</strong><span>Why genus-level calls are safer than species-level guesses.</span></div>
+          <div><strong>Controls</strong><span>How blanks changed our confidence.</span></div>
+          <div><strong>Biology</strong><span>What the most important organisms may be doing.</span></div>
+        </div>
       </article>
     </section>
   </main>
 
   <footer class="footer">
-    <p>Built for Group Alpha's Boyce Park pond-water taxonomic analysis. Example values are placeholders; replace them with the real Alpha results before submitting.</p>
+    <p>Presentation site for Group Alpha's Boyce Park pond-water microbiome project. Sample values are placeholders until replaced with real Alpha results.</p>
   </footer>
 
   <script src="app.js"></script>

@@ -1,8 +1,8 @@
 # Group Alpha | Boyce Park Microbiome Project
 
-Static website for the Group Alpha "Who Lives There?" taxonomic analysis project.
+Static presentation website for the Group Alpha "Who Lives There?" taxonomic analysis project.
 
-The site is scoped only to the Boyce Park pond-water assignment. It helps the team organize the required work:
+The site is scoped only to the Boyce Park pond-water assignment. It is designed to read like a student presentation while still covering the required evidence:
 
 - Rank abundant representative sequences from `feature-table.tsv`
 - BLAST top sequences from `dna-sequences.fasta`
@@ -11,7 +11,7 @@ The site is scoped only to the Boyce Park pond-water assignment. It helps the te
 - Build a major-taxa composition profile
 - Write notes for the two required PCoA views
 - Include "Going Farther" work such as PICRUSt or PERMANOVA/ANOSIM when time allows
-- Export a notebook outline for Colab
+- Export speaker notes for Colab or presentation prep
 
 ## Run Locally
 

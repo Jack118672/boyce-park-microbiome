@@ -1,4 +1,4 @@
-const STORAGE_KEY = "alphaBoyceParkSite";
+const STORAGE_KEY = "alphaBoyceParkPresentation";
 
 const defaultState = {
   features: [],
@@ -12,66 +12,6 @@ const defaultState = {
 };
 
 const state = loadState();
-
-const workflow = [
-  {
-    id: "rank",
-    title: "Rank abundant sequences",
-    body: "Open feature-table.tsv and identify roughly 20 representative sequences with the highest abundance in Boyce Park samples.",
-    evidence: "Ranked feature list"
-  },
-  {
-    id: "blast",
-    title: "Classify by BLAST",
-    body: "Open dna-sequences.fasta, copy each top representative sequence, and align it against a 16S reference database.",
-    evidence: "BLAST calls"
-  },
-  {
-    id: "reconcile",
-    title: "Reconcile with pipeline",
-    body: "Compare your BLAST call with taxonomy.tsv. Watch confidence fade below genus level and record disagreements.",
-    evidence: "Trust table"
-  },
-  {
-    id: "controls",
-    title: "Check controls",
-    body: "Look at blank and distilled-water controls before trusting an organism. Control hits may be contamination.",
-    evidence: "Control note"
-  },
-  {
-    id: "profile",
-    title: "Build the profile",
-    body: "Use the taxonomy table or taxa_barplot.qzv to show which groups dominate the Boyce Park pond-water community.",
-    evidence: "Composition figure"
-  },
-  {
-    id: "pcoa",
-    title: "Compare two ways",
-    body: "Make one PCoA with the river baseline and another view inside Alpha data by site, sub-location, or metadata.",
-    evidence: "Two PCoA views"
-  },
-  {
-    id: "story",
-    title: "Tell the biology story",
-    body: "Explain what lives there, what is surprising, what the organisms may do, and what the evidence can support.",
-    evidence: "Claim-evidence-reasoning"
-  },
-  {
-    id: "understand",
-    title: "Own every step",
-    body: "AI is allowed, but the team must understand each tool, figure, parameter, and claim well enough for Q&A.",
-    evidence: "Demo answers"
-  }
-];
-
-const submissionItems = [
-  ["shared", "Colab notebook link is shared and opens for instructors."],
-  ["profileSubmit", "Notebook includes the taxonomic profile and BLAST trust check."],
-  ["twoViews", "Notebook includes both required comparison views."],
-  ["storySubmit", "Write-up tells a biology-grounded story, not just a plot tour."],
-  ["figCaptions", "Every figure has a caption that explains the takeaway."],
-  ["defend", "Team can defend every tool, figure, and claim during Q&A."]
-];
 
 const palette = ["#00a6a6", "#f25f5c", "#ffc857", "#6c63ff", "#2e7d32", "#277da1", "#f3722c", "#577590"];
 
@@ -112,32 +52,6 @@ function escapeHtml(value) {
     "\"": "&quot;",
     "'": "&#039;"
   }[char]));
-}
-
-function renderWorkflow() {
-  const container = $("workflowSteps");
-  container.innerHTML = "";
-  workflow.forEach((step, index) => {
-    const card = document.createElement("article");
-    card.className = "workflow-card";
-    card.innerHTML = `
-      <span class="step-num">${index + 1}</span>
-      <h3>${step.title}</h3>
-      <p>${step.body}</p>
-      <label><input type="checkbox" data-save-check="${step.id}" ${state.checks[step.id] ? "checked" : ""}> ${step.evidence}</label>
-    `;
-    container.appendChild(card);
-  });
-}
-
-function renderSubmissionChecklist() {
-  const container = $("submissionChecklist");
-  container.innerHTML = "";
-  submissionItems.forEach(([id, label]) => {
-    const row = document.createElement("label");
-    row.innerHTML = `<input type="checkbox" data-save-check="${id}" ${state.checks[id] ? "checked" : ""}> ${label}`;
-    container.appendChild(row);
-  });
 }
 
 function addFeature(feature = {}) {
@@ -388,9 +302,9 @@ function loadExample() {
     { id: uid(), name: "Cyanobacteria", percent: 8 },
     { id: uid(), name: "Other", percent: 11 }
   ];
-  state.notes.riverComparison = "Example placeholder: Boyce Park should be compared against the shared river baseline. Replace this with the actual PCoA pattern.";
-  state.notes.internalComparison = "Example placeholder: Look for clustering by pond sub-location, control status, chemistry, or another Alpha metadata feature.";
-  state.notes.storyText = "Example placeholder: Dominant freshwater heterotrophs would support a pond-water story; acid-tolerant, metal-associated, sulfur-cycling, or iron-cycling taxa would strengthen a mine-drainage influence claim.";
+  state.notes.riverComparison = "Sample script: In this slide, we compare Boyce Park with the shared river baseline. If Boyce Park separates from the river samples, that supports the idea that the pond is its own community rather than just another urban water sample.";
+  state.notes.internalComparison = "Sample script: Inside the Alpha samples, we look for clustering by sub-location, control status, or any other metadata. This helps us tell whether the Boyce Park samples are consistent or split into smaller patterns.";
+  state.notes.storyText = "Sample script: Our strongest evidence points to a freshwater pond community dominated by common aquatic bacterial groups. We would be cautious about claiming mine-drainage influence unless the same signal appears in trusted taxa, controls, and the PCoA comparison.";
   saveState();
   renderFeatures();
   renderTaxa();
@@ -406,40 +320,41 @@ function exportOutline() {
     .map((feature) => `- ${feature.featureId || "Feature"}: BLAST=${feature.blast || "TBD"}; pipeline=${feature.pipeline || "TBD"}; identity=${feature.identity || 0}%; trust=${feature.trust}; control=${feature.control ? "yes" : "no"}`)
     .join("\n") || "- Add BLAST calls.";
 
-  const markdown = `# Group Alpha: Boyce Park Pond Water Microbiome
+  const markdown = `# Group Alpha Speaker Notes: Boyce Park Pond Water Microbiome
 
-## Project Question
-Does Boyce Park pond water look like an ordinary freshwater community, a mine-drainage-influenced community, or both?
+## Opening
+Boyce Park pond water is interesting because the park looks natural, but the region has a coal-mining history. Our project uses microbes as evidence for what kind of community lives there.
 
-## BLAST vs. Pipeline Trust
+## Evidence: BLAST vs. Pipeline Trust
 ${featureLines}
 
 High-trust calls: ${highTrust.length}
 Control flags: ${controlFlags.length}
 
-## Community Profile
+## Evidence: Community Profile
 ${taxaLines}
 
-## PCoA View 1: Boyce Park vs. Rivers
+## Comparison 1: Boyce Park vs. Rivers
 ${state.notes.riverComparison || "Add interpretation."}
 
-## PCoA View 2: Inside Alpha
+## Comparison 2: Inside Alpha
 ${state.notes.internalComparison || "Add interpretation."}
 
-## Biology Story
+## Interpretation
 ${state.notes.storyText || "Add claim, evidence, and reasoning."}
 
-## Going Farther
-- PICRUSt function prediction: ${state.checks.picrust ? "included" : "not yet"}
-- PERMANOVA or ANOSIM: ${state.checks.permanova ? "included" : "not yet"}
-- Indicator organisms: ${state.checks.indicator ? "included" : "not yet"}
+## Q&A Defense
+- Explain how BLAST classifies by alignment-as-search.
+- Explain why the pipeline and BLAST can disagree.
+- Explain how controls affect trust.
+- Explain why composition and PCoA answer different parts of the question.
 `;
 
   const blob = new Blob([markdown], { type: "text/markdown" });
   const url = URL.createObjectURL(blob);
   const link = document.createElement("a");
   link.href = url;
-  link.download = "group-alpha-boyce-park-outline.md";
+  link.download = "group-alpha-boyce-park-speaker-notes.md";
   document.body.appendChild(link);
   link.click();
   link.remove();
@@ -527,8 +442,6 @@ function wireNavigation() {
 }
 
 function init() {
-  renderWorkflow();
-  renderSubmissionChecklist();
   wireCheckPersistence();
   wireNavigation();
   wireNotes();
