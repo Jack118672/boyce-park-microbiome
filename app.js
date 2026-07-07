@@ -311,50 +311,6 @@ function loadExample() {
   wireNotes();
 }
 
-function exportOutline() {
-  const highTrust = state.features.filter((feature) => feature.trust === "high");
-  const controlFlags = state.features.filter((feature) => feature.control);
-  const taxaLines = state.taxa.map((taxon) => `- ${taxon.name || "Unnamed taxon"}: ${Number(taxon.percent || 0).toFixed(1)}%`).join("\n") || "- Add taxa.";
-  const featureLines = state.features
-    .sort((a, b) => Number(b.reads) - Number(a.reads))
-    .map((feature) => `- ${feature.featureId || "Feature"}: BLAST=${feature.blast || "TBD"}; pipeline=${feature.pipeline || "TBD"}; identity=${feature.identity || 0}%; trust=${feature.trust}; control=${feature.control ? "yes" : "no"}`)
-    .join("\n") || "- Add BLAST calls.";
-
-  const markdown = `# Group Alpha Speaker Notes: Boyce Park Pond Water Microbiome
-
-## Opening
-Boyce Park pond water is interesting because the park looks natural, but the region has a coal-mining history. Our project uses microbes as evidence for what kind of community lives there.
-
-## Evidence: BLAST vs. Pipeline Trust
-${featureLines}
-
-High-trust calls: ${highTrust.length}
-Control flags: ${controlFlags.length}
-
-## Evidence: Community Profile
-${taxaLines}
-
-## Comparison 1: Boyce Park vs. Rivers
-${state.notes.riverComparison || "Add interpretation."}
-
-## Comparison 2: Inside Alpha
-${state.notes.internalComparison || "Add interpretation."}
-
-## Interpretation
-${state.notes.storyText || "Add claim, evidence, and reasoning."}
-`;
-
-  const blob = new Blob([markdown], { type: "text/markdown" });
-  const url = URL.createObjectURL(blob);
-  const link = document.createElement("a");
-  link.href = url;
-  link.download = "group-alpha-boyce-park-speaker-notes.md";
-  document.body.appendChild(link);
-  link.click();
-  link.remove();
-  URL.revokeObjectURL(url);
-}
-
 function drawPond() {
   const canvas = $("pondCanvas");
   const ctx = canvas.getContext("2d");
@@ -442,7 +398,6 @@ function init() {
   $("addFeature").addEventListener("click", () => addFeature());
   $("addTaxon").addEventListener("click", () => addTaxon());
   $("loadExample").addEventListener("click", loadExample);
-  $("exportSummary").addEventListener("click", exportOutline);
 
   if (state.features.length === 0) {
     addFeature();
