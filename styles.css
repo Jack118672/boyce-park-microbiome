@@ -468,6 +468,133 @@ input[type="checkbox"] {
   font-weight: 800;
 }
 
+.pcoa-figure {
+  margin: 18px 0;
+}
+
+.pcoa-figure svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #ffffff;
+  box-shadow: 0 12px 28px rgba(22, 50, 79, 0.08);
+}
+
+.pcoa-figure figcaption {
+  margin-top: 8px;
+  color: #354154;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.plot-bg {
+  fill: #fbfdff;
+  stroke: #d8e0ee;
+}
+
+.axis {
+  stroke: #41506a;
+  stroke-width: 2;
+}
+
+.axis-label,
+.plot-legend text,
+.plot-callout {
+  fill: var(--navy);
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 800;
+}
+
+.axis-label {
+  font-size: 15px;
+}
+
+.rotate {
+  transform: rotate(-90deg);
+}
+
+.plot-legend text {
+  font-size: 13px;
+}
+
+.plot-callout {
+  font-size: 14px;
+}
+
+.cluster {
+  stroke-width: 3;
+  opacity: 0.28;
+}
+
+.pond-cluster {
+  fill: var(--gold);
+  stroke: #d89d1d;
+}
+
+.river-cluster {
+  fill: var(--purple);
+  stroke: #4f49d8;
+}
+
+.edge-cluster {
+  fill: var(--teal);
+  stroke: #007d7d;
+}
+
+.open-cluster {
+  fill: var(--coral);
+  stroke: #ce4040;
+}
+
+.control-cluster {
+  fill: #aeb8c8;
+  stroke: #69758a;
+}
+
+.point-set circle {
+  stroke: #ffffff;
+  stroke-width: 3;
+}
+
+.pond-points circle,
+.pond-dot {
+  fill: var(--gold);
+}
+
+.river-points circle,
+.river-dot {
+  fill: var(--purple);
+}
+
+.edge-points circle,
+.edge-dot {
+  fill: var(--teal);
+}
+
+.open-points circle,
+.open-dot {
+  fill: var(--coral);
+}
+
+.control-points circle,
+.control-dot {
+  fill: #69758a;
+}
+
+.separation-arrow {
+  fill: none;
+  stroke: var(--navy);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-dasharray: 8 8;
+}
+
+.teal-arrow {
+  stroke: var(--teal);
+}
+
 .proof-box {
   margin: 16px 0;
   padding: 15px 16px;

@@ -4,8 +4,6 @@ const defaultState = {
   features: [],
   taxa: [],
   notes: {
-    riverComparison: "",
-    internalComparison: "",
     storyText: ""
   },
   checks: {}
@@ -302,8 +300,6 @@ function loadExample() {
     { id: uid(), name: "Cyanobacteria", percent: 8 },
     { id: uid(), name: "Other", percent: 11 }
   ];
-  state.notes.riverComparison = "Sample script: In this slide, we compare Boyce Park with the shared river baseline. The proof is the spacing of the PCoA points: if Boyce Park points cluster near each other but away from river points, that shows the pond community is different from the river baseline. I would also check that controls do not overlap with the real pond samples before making the claim strongly.";
-  state.notes.internalComparison = "Sample script: Inside the Alpha samples, the proof is whether repeated samples or samples from the same sub-location land close together on the PCoA plot. If those points group together and controls sit outside the pond cluster, that supports a real within-pond pattern instead of random scatter.";
   state.notes.storyText = "Sample script: Our strongest evidence points to a freshwater pond community dominated by common aquatic bacterial groups. We would be cautious about claiming mine-drainage influence unless the same signal appears in trusted taxa, controls, and the PCoA comparison.";
   saveState();
   renderFeatures();
