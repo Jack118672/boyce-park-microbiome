@@ -753,14 +753,6 @@ textarea {
   margin-bottom: 9px;
 }
 
-.footer {
-  width: min(1400px, calc(100% - 32px));
-  margin: 0 auto 26px;
-  padding: 16px 0;
-  color: var(--muted);
-  font-size: 14px;
-}
-
 .sr-only {
   position: absolute;
   width: 1px;
@@ -806,8 +798,7 @@ textarea {
     font-size: 34px;
   }
 
-  main,
-  .footer {
+  main {
     width: min(100% - 20px, 1400px);
   }
 
