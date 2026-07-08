@@ -468,6 +468,30 @@ input[type="checkbox"] {
   font-weight: 800;
 }
 
+.proof-box {
+  margin: 16px 0;
+  padding: 15px 16px;
+  border-left: 5px solid var(--gold);
+  border-radius: 8px;
+  background: linear-gradient(135deg, rgba(255, 200, 87, 0.24), #ffffff);
+}
+
+.proof-box strong {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--navy);
+}
+
+.proof-box p {
+  margin: 0;
+  color: #354154;
+}
+
+.teal-proof {
+  border-left-color: var(--teal);
+  background: linear-gradient(135deg, rgba(0, 166, 166, 0.16), #ffffff);
+}
+
 .workflow-grid,
 .stretch-grid {
   display: grid;
