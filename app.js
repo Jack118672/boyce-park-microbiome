@@ -272,7 +272,7 @@ function wireCheckPersistence() {
 
 function loadExample() {
   state.features = [
-    { id: uid(), featureId: "821495", reads: 303113, blast: "Attached BLAST screen: Ferruvum hit report", pipeline: "Proteobacteria; Gammaproteobacteria; Burkholderiales", identity: 99.7, control: false, trust: "medium" },
+    { id: uid(), featureId: "821495", reads: 303113, blast: "Manual BLAST comparison: Ferruvum-related hits", pipeline: "Proteobacteria; Gammaproteobacteria; Burkholderiales", identity: 99.7, control: false, trust: "medium" },
     { id: uid(), featureId: "4402734", reads: 74736, blast: "Chloroplast/plastid signal", pipeline: "Cyanobacteria; chloroplast signal", identity: 100.0, control: false, trust: "high" },
     { id: uid(), featureId: "550329", reads: 51764, blast: "Chloroplast/plastid signal", pipeline: "Cyanobacteria; chloroplast signal", identity: 100.0, control: false, trust: "high" },
     { id: uid(), featureId: "4327233", reads: 17358, blast: "Family-level call", pipeline: "Actinobacteriota; Microbacteriaceae", identity: 99.9, control: false, trust: "medium" },

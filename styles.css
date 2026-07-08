@@ -468,27 +468,6 @@ input[type="checkbox"] {
   font-weight: 800;
 }
 
-.blast-proof {
-  margin: 18px 0 0;
-}
-
-.blast-proof img {
-  display: block;
-  width: 100%;
-  max-height: 360px;
-  object-fit: contain;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: #ffffff;
-}
-
-.blast-proof figcaption {
-  margin-top: 8px;
-  color: #354154;
-  font-size: 14px;
-  font-weight: 700;
-}
-
 .pcoa-figure {
   margin: 18px 0;
 }
