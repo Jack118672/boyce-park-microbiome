@@ -3,9 +3,7 @@ const STORAGE_KEY = "alphaBoyceParkPresentation";
 const defaultState = {
   features: [],
   taxa: [],
-  notes: {
-    storyText: ""
-  },
+  notes: {},
   checks: {}
 };
 
@@ -300,7 +298,6 @@ function loadExample() {
     { id: uid(), name: "Cyanobacteria", percent: 8 },
     { id: uid(), name: "Other", percent: 11 }
   ];
-  state.notes.storyText = "Sample script: Our strongest evidence points to a freshwater pond community dominated by common aquatic bacterial groups. We would be cautious about claiming mine-drainage influence unless the same signal appears in trusted taxa, controls, and the PCoA comparison.";
   saveState();
   renderFeatures();
   renderTaxa();
