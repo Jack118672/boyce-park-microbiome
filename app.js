@@ -3,7 +3,6 @@ const STORAGE_KEY = "alphaBoyceParkPresentation";
 const defaultState = {
   features: [],
   taxa: [],
-  notes: {},
   checks: {}
 };
 
@@ -23,7 +22,6 @@ function loadState() {
     return {
       ...structuredClone(defaultState),
       ...parsed,
-      notes: { ...defaultState.notes, ...(parsed.notes || {}) },
       checks: parsed.checks || {}
     };
   } catch {
@@ -93,7 +91,7 @@ function renderFeatures() {
     row.innerHTML = `
       <td><input value="${escapeHtml(feature.featureId)}" placeholder="ASV_001"></td>
       <td><input type="number" min="0" value="${feature.reads}"></td>
-      <td><input value="${escapeHtml(feature.blast)}" placeholder="Genus or closest match"></td>
+      <td><input value="${escapeHtml(feature.blast)}" placeholder="Manual BLAST result or note"></td>
       <td><input value="${escapeHtml(feature.pipeline)}" placeholder="SILVA/QIIME2 call"></td>
       <td><input type="number" min="0" max="100" step="0.1" value="${feature.identity}"></td>
       <td class="center"><input type="checkbox" ${feature.control ? "checked" : ""}></td>
@@ -135,7 +133,7 @@ function renderStats() {
   $("totalReads").textContent = totalReads.toLocaleString();
   $("highTrust").textContent = highTrust;
   $("controlFlags").textContent = controlFlags;
-  $("topOrganism").textContent = top && (top.blast || top.pipeline || top.featureId) ? (top.blast || top.pipeline || top.featureId) : "-";
+  $("topOrganism").textContent = top && (top.pipeline || top.blast || top.featureId) ? (top.pipeline || top.blast || top.featureId) : "-";
 }
 
 function addTaxon(taxon = {}) {
@@ -263,18 +261,6 @@ function wrapLabel(ctx, text, x, y, maxWidth, lineHeight) {
   ctx.fillText(line, x, lineY);
 }
 
-function wireNotes() {
-  Object.keys(state.notes).forEach((id) => {
-    const element = $(id);
-    if (!element) return;
-    element.value = state.notes[id] || "";
-    element.addEventListener("input", (event) => {
-      state.notes[id] = event.target.value;
-      saveState();
-    });
-  });
-}
-
 function wireCheckPersistence() {
   document.addEventListener("change", (event) => {
     const key = event.target?.dataset?.saveCheck;
@@ -286,22 +272,24 @@ function wireCheckPersistence() {
 
 function loadExample() {
   state.features = [
-    { id: uid(), featureId: "ASV_0042", reads: 18420, blast: "Limnohabitans", pipeline: "Burkholderiaceae; Limnohabitans", identity: 99.1, control: false, trust: "high" },
-    { id: uid(), featureId: "ASV_0017", reads: 13980, blast: "Polynucleobacter", pipeline: "Burkholderiaceae; Polynucleobacter", identity: 98.7, control: false, trust: "high" },
-    { id: uid(), featureId: "ASV_0099", reads: 8220, blast: "Acidovorax", pipeline: "Comamonadaceae; Acidovorax", identity: 97.9, control: false, trust: "medium" },
-    { id: uid(), featureId: "ASV_0121", reads: 910, blast: "Ralstonia", pipeline: "Burkholderiaceae; Ralstonia", identity: 99.5, control: true, trust: "low" }
+    { id: uid(), featureId: "821495", reads: 303113, blast: "Attached BLAST screen: Ferruvum hit report", pipeline: "Proteobacteria; Gammaproteobacteria; Burkholderiales", identity: 99.7, control: false, trust: "medium" },
+    { id: uid(), featureId: "4402734", reads: 74736, blast: "Chloroplast/plastid signal", pipeline: "Cyanobacteria; chloroplast signal", identity: 100.0, control: false, trust: "high" },
+    { id: uid(), featureId: "550329", reads: 51764, blast: "Chloroplast/plastid signal", pipeline: "Cyanobacteria; chloroplast signal", identity: 100.0, control: false, trust: "high" },
+    { id: uid(), featureId: "4327233", reads: 17358, blast: "Family-level call", pipeline: "Actinobacteriota; Microbacteriaceae", identity: 99.9, control: false, trust: "medium" },
+    { id: uid(), featureId: "254922", reads: 15294, blast: "Possible acid-tolerant signal", pipeline: "Proteobacteria; Acidocella", identity: 81.3, control: false, trust: "medium" },
+    { id: uid(), featureId: "4203120", reads: 9007, blast: "Uncultured group; weak story claim", pipeline: "Actinobacteriota; uncultured Acidimicrobiia", identity: 100.0, control: false, trust: "low" }
   ];
   state.taxa = [
-    { id: uid(), name: "Proteobacteria", percent: 48 },
-    { id: uid(), name: "Bacteroidota", percent: 19 },
-    { id: uid(), name: "Actinobacteriota", percent: 14 },
-    { id: uid(), name: "Cyanobacteria", percent: 8 },
-    { id: uid(), name: "Other", percent: 11 }
+    { id: uid(), name: "Proteobacteria", percent: 60.0 },
+    { id: uid(), name: "Cyanobacteria / chloroplast", percent: 18.4 },
+    { id: uid(), name: "Actinobacteriota", percent: 11.6 },
+    { id: uid(), name: "Acidobacteriota", percent: 2.4 },
+    { id: uid(), name: "Bacteroidota", percent: 2.1 },
+    { id: uid(), name: "Other", percent: 5.5 }
   ];
   saveState();
   renderFeatures();
   renderTaxa();
-  wireNotes();
 }
 
 function drawPond() {
@@ -387,7 +375,6 @@ function wireNavigation() {
 function init() {
   wireCheckPersistence();
   wireNavigation();
-  wireNotes();
   $("addFeature").addEventListener("click", () => addFeature());
   $("addTaxon").addEventListener("click", () => addTaxon());
   $("loadExample").addEventListener("click", loadExample);

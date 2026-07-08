@@ -9,9 +9,8 @@ The site is scoped only to the Boyce Park pond-water assignment. It is designed 
 - Compare BLAST calls against `taxonomy.tsv`
 - Check blank and distilled-water controls before trusting taxa
 - Build a major-taxa composition profile
-- Write notes for the two required PCoA views
+- Show two PCoA views using the Boyce Park and shared water-site tables
 - Include "Going Farther" work such as PICRUSt or PERMANOVA/ANOSIM when time allows
-- Export speaker notes for Colab or presentation prep
 
 ## Run Locally
 
@@ -34,6 +33,8 @@ After pushing this repository to GitHub:
 
 The app has no build step and no external dependencies.
 
-## Data Reminder
+## Data Used
 
-The example data in the interface is only placeholder data for practicing the workflow. Replace it with the real Group Alpha Boyce Park results before submitting the Colab notebook.
+The "Load Boyce evidence" button uses the Boyce Park feature table and taxonomy files from the CMU Drive project folders. The PCoA plots were computed from the shared water feature table, with Boyce Park compared against the river-baseline samples and then against Boyce Park sub-locations.
+
+Audit values used on the page: 5,818 Boyce features in `dna-sequences.fasta`, 788,237 Boyce reads in the parsed feature table, 60.0% Proteobacteria, 18.4% Cyanobacteria/chloroplast, and 11.6% Actinobacteriota. The shared-water PCoA uses 11 Boyce points, 15 river-baseline points, and 2 controls.
