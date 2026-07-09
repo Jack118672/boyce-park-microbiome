@@ -35,6 +35,6 @@ The app has no build step and no external dependencies.
 
 ## Data Used
 
-The "Load Boyce evidence" button uses the Boyce Park feature table and taxonomy files from the CMU Drive project folders. The PCoA plots were computed from the shared water feature table, with Boyce Park compared against the river-baseline samples and then against Boyce Park sub-locations.
+The "Load Boyce evidence" button uses the 20 most abundant Boyce Park features from the feature table, plus the matching taxonomy confidence and BLAST notes from the result screenshots. The PCoA plots were computed from the shared water feature table, with Boyce Park compared against the river-baseline samples and then against Boyce Park sub-locations.
 
-Audit values used on the page: 5,818 Boyce features in `dna-sequences.fasta`, 788,237 Boyce reads in the parsed feature table, 60.0% Proteobacteria, 18.4% Cyanobacteria/chloroplast, and 11.6% Actinobacteriota. The shared-water PCoA uses 11 Boyce points, 15 river-baseline points, and 2 controls.
+Audit values used on the page: 5,818 Boyce features in `dna-sequences.fasta`, 882,619 Boyce reads in the parsed feature table, 56.5% Proteobacteria, 18.8% Cyanobacteria/chloroplast, and 14.3% Actinobacteriota. The shared-water PCoA uses 11 Boyce points, 15 river-baseline points, and 2 controls.
