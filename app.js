@@ -1,5 +1,5 @@
 const STORAGE_KEY = "alphaBoyceParkPresentation";
-const DATASET_VERSION = "boyce-top-20-2026-07";
+const DATASET_VERSION = "boyce-top-20-blast-identity-2026-07";
 
 const defaultState = {
   features: [],
@@ -58,7 +58,7 @@ function addFeature(feature = {}) {
     reads: Number(feature.reads || 0),
     blast: feature.blast || "",
     pipeline: feature.pipeline || "",
-    identity: Number(feature.identity || 0),
+    identity: feature.identity || "",
     control: Boolean(feature.control),
     trust: feature.trust || "medium"
   });
@@ -69,7 +69,7 @@ function addFeature(feature = {}) {
 function updateFeature(id, field, value) {
   const feature = state.features.find((item) => item.id === id);
   if (!feature) return;
-  if (field === "reads" || field === "identity") {
+  if (field === "reads") {
     feature[field] = Number(value || 0);
   } else if (field === "control") {
     feature[field] = Boolean(value);
@@ -96,7 +96,7 @@ function renderFeatures() {
       <td><input type="number" min="0" value="${feature.reads}"></td>
       <td><input value="${escapeHtml(feature.blast)}" placeholder="Manual BLAST result or note"></td>
       <td><input value="${escapeHtml(feature.pipeline)}" placeholder="SILVA/QIIME2 call"></td>
-      <td><input type="number" min="0" max="100" step="0.1" value="${feature.identity}"></td>
+      <td><input value="${escapeHtml(feature.identity)}" placeholder="99.3"></td>
       <td class="center"><input type="checkbox" ${feature.control ? "checked" : ""}></td>
       <td>
         <select class="${trustClass(feature.trust)}">
@@ -276,26 +276,26 @@ function wireCheckPersistence() {
 function loadExample() {
   state.datasetVersion = DATASET_VERSION;
   state.features = [
-    { id: uid(), featureId: "821495", reads: 303122, blast: "BLAST: Ferruvum spp. hits, about 99.1%", pipeline: "Proteobacteria; Burkholderiales", identity: 99.7, control: false, trust: "medium" },
-    { id: uid(), featureId: "4402734", reads: 94842, blast: "BLAST: Eunotia/Navicula chloroplast, about 99.3%", pipeline: "Cyanobacteria; chloroplast", identity: 100.0, control: false, trust: "high" },
-    { id: uid(), featureId: "550329", reads: 51764, blast: "BLAST: Cryptomonas/Komma plastid, about 96.8%", pipeline: "Cyanobacteria; chloroplast", identity: 100.0, control: false, trust: "high" },
-    { id: uid(), featureId: "4203120", reads: 20357, blast: "BLAST: uncultured Acidimicrobiia group", pipeline: "Actinobacteriota; uncultured Acidimicrobiia", identity: 100.0, control: false, trust: "low" },
-    { id: uid(), featureId: "4327233", reads: 17360, blast: "BLAST: Curtobacterium hits, about 99.3%", pipeline: "Actinobacteriota; Microbacteriaceae", identity: 99.9, control: false, trust: "high" },
-    { id: uid(), featureId: "254922", reads: 16200, blast: "BLAST: Acidocella spp., about 99.1%", pipeline: "Proteobacteria; Acidocella", identity: 81.3, control: false, trust: "medium" },
-    { id: uid(), featureId: "1140775", reads: 10178, blast: "BLAST: Aciditerrimonas/Actinobacterium hits, about 93.4%", pipeline: "Actinobacteriota; uncultured Acidimicrobiaceae", identity: 99.6, control: false, trust: "medium" },
-    { id: uid(), featureId: "283765", reads: 8520, blast: "BLAST: Kocuria spp., about 99.3%", pipeline: "Actinobacteriota; Kocuria", identity: 91.7, control: false, trust: "high" },
-    { id: uid(), featureId: "13505", reads: 8290, blast: "BLAST: Aciditerrimonas/Actinobacterium hits", pipeline: "Actinobacteriota; uncultured Banisveld", identity: 100.0, control: false, trust: "low" },
-    { id: uid(), featureId: "3538", reads: 5897, blast: "BLAST: Klebsormidium chloroplast, about 99.3%", pipeline: "Cyanobacteria; chloroplast", identity: 85.7, control: false, trust: "high" },
-    { id: uid(), featureId: "219317", reads: 5496, blast: "BLAST: Aciditerrimonas/Actinobacterium hits, about 93.2%", pipeline: "Actinobacteriota; uncultured Acidimicrobiaceae", identity: 99.5, control: false, trust: "medium" },
-    { id: uid(), featureId: "647790", reads: 5406, blast: "BLAST: Roseiarcus/Methylopila hits, about 97.7%", pipeline: "Proteobacteria; Roseiarcus", identity: 98.3, control: false, trust: "high" },
-    { id: uid(), featureId: "1113279", reads: 5399, blast: "BLAST: Acidiphilium spp., about 99.3%", pipeline: "Proteobacteria; Acidiphilium", identity: 98.3, control: false, trust: "high" },
-    { id: uid(), featureId: "683891", reads: 5253, blast: "BLAST: Fertoebacter/Rhodobacter-like hits, about 98.0%", pipeline: "Proteobacteria; Pseudorhodobacter; mine drainage", identity: 82.2, control: false, trust: "medium" },
-    { id: uid(), featureId: "4203118", reads: 5004, blast: "BLAST: Rhodopila/Acidisphaera hits, about 96.8%", pipeline: "Proteobacteria; Acetobacteraceae", identity: 74.9, control: false, trust: "low" },
-    { id: uid(), featureId: "1047041", reads: 4942, blast: "BLAST: Lawsonella clevelandensis, about 99.1%", pipeline: "Actinobacteriota; Lawsonella", identity: 100.0, control: false, trust: "high" },
-    { id: uid(), featureId: "1121839", reads: 4283, blast: "BLAST: Rhodoblastus spp., about 98.9%", pipeline: "Proteobacteria; Rhodoblastus", identity: 89.9, control: false, trust: "medium" },
-    { id: uid(), featureId: "4453684", reads: 4165, blast: "BLAST: Povalibacter/Steroidobacter hits, about 92.7%", pipeline: "Proteobacteria; uncultured WD260", identity: 99.4, control: false, trust: "medium" },
-    { id: uid(), featureId: "169182", reads: 3632, blast: "BLAST: Enterococcus/E. coli hits, about 99.6%", pipeline: "Proteobacteria; Enterobacterales", identity: 99.8, control: false, trust: "low" },
-    { id: uid(), featureId: "150673", reads: 3515, blast: "BLAST: Sphingomonas spp., about 99.3%", pipeline: "Proteobacteria; Sphingomonas", identity: 90.2, control: false, trust: "high" }
+    { id: uid(), featureId: "821495", reads: 303122, blast: "BLAST: Ferruvum spp. hits, about 99.1%", pipeline: "Proteobacteria; Burkholderiales", identity: "99.14", control: false, trust: "medium" },
+    { id: uid(), featureId: "4402734", reads: 94842, blast: "BLAST: Eunotia/Navicula chloroplast, about 99.3%", pipeline: "Cyanobacteria; chloroplast", identity: "99.32", control: false, trust: "high" },
+    { id: uid(), featureId: "550329", reads: 51764, blast: "BLAST: Cryptomonas/Komma plastid, about 96.8%", pipeline: "Cyanobacteria; chloroplast", identity: "96.83", control: false, trust: "high" },
+    { id: uid(), featureId: "4203120", reads: 20357, blast: "No BLAST screenshot provided; pipeline places it in uncultured Acidimicrobiia", pipeline: "Actinobacteriota; uncultured Acidimicrobiia", identity: "not shown", control: false, trust: "low" },
+    { id: uid(), featureId: "4327233", reads: 17360, blast: "BLAST: Curtobacterium hits, about 99.3%", pipeline: "Actinobacteriota; Microbacteriaceae", identity: "99.33", control: false, trust: "high" },
+    { id: uid(), featureId: "254922", reads: 16200, blast: "BLAST: Acidocella spp., about 99.1%", pipeline: "Proteobacteria; Acidocella", identity: "99.09", control: false, trust: "medium" },
+    { id: uid(), featureId: "1140775", reads: 10178, blast: "BLAST: Aciditerrimonas/Actinobacterium hits, about 93.4%", pipeline: "Actinobacteriota; uncultured Acidimicrobiaceae", identity: "93.44", control: false, trust: "medium" },
+    { id: uid(), featureId: "283765", reads: 8520, blast: "BLAST: Kocuria spp., about 99.3%", pipeline: "Actinobacteriota; Kocuria", identity: "99.33", control: false, trust: "high" },
+    { id: uid(), featureId: "13505", reads: 8290, blast: "BLAST: Bacterium B10H12/Aciditerrimonas hits", pipeline: "Actinobacteriota; uncultured Banisveld", identity: "98.25", control: false, trust: "low" },
+    { id: uid(), featureId: "3538", reads: 5897, blast: "BLAST: Klebsormidium chloroplast, about 99.3%", pipeline: "Cyanobacteria; chloroplast", identity: "99.34", control: false, trust: "high" },
+    { id: uid(), featureId: "219317", reads: 5496, blast: "BLAST: Aciditerrimonas/Actinobacterium hits, about 93.2%", pipeline: "Actinobacteriota; uncultured Acidimicrobiaceae", identity: "93.21", control: false, trust: "medium" },
+    { id: uid(), featureId: "647790", reads: 5406, blast: "BLAST: Roseiarcus/Methylopila hits, about 97.7%", pipeline: "Proteobacteria; Roseiarcus", identity: "97.73", control: false, trust: "high" },
+    { id: uid(), featureId: "1113279", reads: 5399, blast: "BLAST: Acidiphilium spp., about 99.3%", pipeline: "Proteobacteria; Acidiphilium", identity: "99.32", control: false, trust: "high" },
+    { id: uid(), featureId: "683891", reads: 5253, blast: "BLAST: Fertoebacter/Rhodobacter-like hits, about 98.0%", pipeline: "Proteobacteria; Pseudorhodobacter; mine drainage", identity: "97.95", control: false, trust: "medium" },
+    { id: uid(), featureId: "4203118", reads: 5004, blast: "BLAST: Rhodopila/Acidisphaera hits, about 96.8%", pipeline: "Proteobacteria; Acetobacteraceae", identity: "96.82", control: false, trust: "low" },
+    { id: uid(), featureId: "1047041", reads: 4942, blast: "BLAST: Lawsonella clevelandensis, about 99.1%", pipeline: "Actinobacteriota; Lawsonella", identity: "99.10", control: false, trust: "high" },
+    { id: uid(), featureId: "1121839", reads: 4283, blast: "BLAST: Rhodoblastus spp., about 98.9%", pipeline: "Proteobacteria; Rhodoblastus", identity: "98.86", control: false, trust: "medium" },
+    { id: uid(), featureId: "4453684", reads: 4165, blast: "BLAST: Povalibacter/Steroidobacter hits, about 92.7%", pipeline: "Proteobacteria; uncultured WD260", identity: "92.70", control: false, trust: "medium" },
+    { id: uid(), featureId: "169182", reads: 3632, blast: "BLAST: Enterococcus/E. coli hits, about 99.6%", pipeline: "Proteobacteria; Enterobacterales", identity: "99.57", control: false, trust: "low" },
+    { id: uid(), featureId: "150673", reads: 3515, blast: "BLAST: Sphingomonas spp., about 99.3%", pipeline: "Proteobacteria; Sphingomonas", identity: "99.32", control: false, trust: "high" }
   ];
   state.taxa = [
     { id: uid(), name: "Proteobacteria", percent: 56.5 },
